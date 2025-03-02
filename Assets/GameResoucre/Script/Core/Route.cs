@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using UnityEditor;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Route : MonoBehaviour
@@ -12,24 +11,30 @@ public class Route : MonoBehaviour
     [SerializeField] private Color _lineColor;
 
     private LineDrawer _lineDrawer;
+    private RouteManager _routeManager;
     public List<Vector3> points { get; private set; }
-    
+
     public Car Car { get => _car; }
     public LineRender LineRender { get => _lineRender; }
+    public RouteManager _RouteManager { get => _routeManager; }
 
+    private void Awake()
+    {
+        _routeManager = GetComponentInParent<RouteManager>();
+    }
 
     void Start()
     {
-        _lineDrawer = GameManager.Instance.lineDrawer;
+        _lineDrawer = _routeManager.lineDrawer;
 
         _lineDrawer.OnParkLinked += OnParkLinkedHandler;
     }
 
-    private void OnParkLinkedHandler(Route route , List<Vector3> path)
+    private void OnParkLinkedHandler(Route route, List<Vector3> path)
     {
-        if(path.Count == 0 || route != this) return;
+        if (path.Count == 0 || route != this) return;
         points = path;
-        GameManager.Instance.RegisterRoute(this);
+       _routeManager.RegisterRoute(this); // đăng kí car di chuyển khi vẽ đến đích
     }
 
 #if UNITY_2022_3
