@@ -41,6 +41,7 @@ public class Route : MonoBehaviour
     private void OnDrawGizmos()
     {
         _lineRender.setColor(_lineColor);
+        _park.setColor(_lineColor);
     }
 #endif
 }
