@@ -1,9 +1,11 @@
-﻿using DG.Tweening;
+﻿using System.Collections;
 using UnityEngine;
 public class Car : MonoBehaviour, IColor
 {
     private Rigidbody rb;
     public Route _route { get; private set; }
+    [SerializeField] private int index;
+    [SerializeField] private float duration;
 
     private void Start()
     {
@@ -16,26 +18,40 @@ public class Car : MonoBehaviour, IColor
 
         for (int i = 0; i < path.Length; i++)
         {
-            path[i].y = transform.position.y;   
+            path[i].y = transform.position.y;
         }
 
-        rb.DOPath(path , 1f , PathType.CatmullRom)
-            .SetLookAt(0.01f, false).
-            SetEase(Ease.Linear);
-
-        //DoPath(path, 1.5f , PathType.CatmullRoom)
-        //+) path: mảng chứa các điểm di chuyển
-        //+) duration(1.5f): Thời gian di chuyển hết các điểm
-        //+) PathType: kiểu path để gameObject di chuyển
-
-        //SetLookAt(0.01f,false)
-        //+)  lookAtHead(0.01f) : Tỉ lệ khoảng cách để tính hướng
-        //+) stableZRotation: có giữ nguyên trục Z không
+        StartCoroutine(MoveCar(path));
     }
+
+    IEnumerator MoveCar(Vector3[] path)
+    {
+        while (index < path.Length)
+        {
+            Vector3 startPos = transform.position;  //cập nhập điểm bắt đầu
+            Vector3 endPos = path[index];           // Cập nhật điểm kết thúc
+
+            Vector3 dir = (endPos - transform.position).normalized;
+            float t = 0;
+            while (t < duration)
+            {
+                transform.position = Vector3.Lerp(startPos, endPos, t/duration);
+                t += Time.deltaTime;
+                yield return null;
+            }
+            
+            transform.rotation = Quaternion.LookRotation(dir);
+            transform.position = endPos;
+            index++;
+            yield return null; 
+        }
+    }
+
+
 
 
     public void setColor(Color newColor)
     {
-        
+
     }
 }
