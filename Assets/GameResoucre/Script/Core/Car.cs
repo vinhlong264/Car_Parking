@@ -64,7 +64,7 @@ public class Car : MonoBehaviour, IColor
 
 
         rb.AddExplosionForce(100, hitDir, 3f);
-        rb.AddForceAtPosition(Vector3.up * 3f , hitDir , ForceMode.Impulse);
+        rb.AddForceAtPosition(Vector3.up * 5f , hitDir , ForceMode.Impulse);
         rb.AddTorque(GetRandomDir(), GetRandomDir(), GetRandomDir());
         isCollision = true;
         fxCarCollision.Play();
@@ -72,7 +72,7 @@ public class Car : MonoBehaviour, IColor
 
     private float GetRandomDir()
     {
-        float angle = 5f;
+        float angle = 20f;
         float rand = Random.value;
 
         return rand < 0.5f ? angle : -angle;

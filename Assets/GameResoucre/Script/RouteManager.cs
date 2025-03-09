@@ -12,6 +12,7 @@ public class RouteManager : MonoBehaviour
     private void Start()
     {
         totalRoute = GetComponentsInChildren<Route>().Length;
+        lineDrawer = GameManager.Instance.lineDrawer;
     }
 
     public void OnParkEnterDestination()
