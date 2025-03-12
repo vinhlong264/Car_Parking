@@ -21,6 +21,7 @@ public class SpawnLevel : MonoBehaviour
     private void YouWinHandler()
     {
         levelData.LevelCompelete();
+        PlayerPrefs.SetInt("LevelGame" , levelData.CurrentLevel);
     }
 
     private void ResetLevel()

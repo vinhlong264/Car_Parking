@@ -7,6 +7,12 @@ public class UiManager : MonoBehaviour
     [SerializeField] private SpawnLevel spawnLevel;
     [SerializeField] private LoadGameAnim anim;
 
+
+    private void Start()
+    {
+        Application.targetFrameRate = 60;
+    }
+
     public void PlayBtnHandler(GameObject active)
     {
         for (int i = 0; i < transform.childCount; i++)
@@ -50,6 +56,7 @@ public class UiManager : MonoBehaviour
 
     public void LoadMenu(GameObject self)
     {
+        Debug.Log("call Back");
         self.SetActive(false);
         anim.FadeAnimtion();
         StartCoroutine(DelayEvent(() =>

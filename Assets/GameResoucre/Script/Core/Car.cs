@@ -66,7 +66,7 @@ public class Car : MonoBehaviour, IColor
         GameManager.Instance.OnYouLose?.Invoke(); // kích hoạt delegate YouLose
 
         FxHandler();
-        rb.AddExplosionForce(100, hitDir, 3f);
+        rb.AddExplosionForce(50, hitDir, 3f);
         rb.AddForceAtPosition(Vector3.up * 5f , hitDir , ForceMode.Impulse);
         rb.AddTorque(GetRandomDir(), GetRandomDir(), GetRandomDir());
         isCollision = true;
@@ -103,7 +103,7 @@ public class Car : MonoBehaviour, IColor
     }
     private float GetRandomDir()
     {
-        float angle = 20f;
+        float angle = 10f;
         float rand = Random.value;
 
         return rand < 0.5f ? angle : -angle;

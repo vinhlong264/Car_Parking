@@ -9,6 +9,7 @@ public class LevelDataSO : ScriptableObject
     [SerializeField] private LevelSO getLevel;
     [SerializeField] private int currentLevel;
 
+    public int CurrentLevel => currentLevel;
     public void GetLevel(string levelName , Transform pos)
     {
         getLevel = levels.FirstOrDefault(x => x.levelName == levelName);
