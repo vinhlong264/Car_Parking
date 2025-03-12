@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class UiManager : MonoBehaviour
 {
     [SerializeField] private SpawnLevel spawnLevel;
+    [SerializeField] private LoadGameAnim anim;
 
     public void PlayBtnHandler(GameObject active)
     {
@@ -33,9 +34,10 @@ public class UiManager : MonoBehaviour
         if (spawnLevel == null) return;
 
         setlf.SetActive(false);
-
+        anim.FadeAnimtion();
         StartCoroutine(DelayEvent(() =>
         {
+            anim.ResetTrigger();
             spawnLevel.NextLevel();
         }));
     }
@@ -46,9 +48,14 @@ public class UiManager : MonoBehaviour
         action?.Invoke();
     }
 
-    public void LoadMenu()
+    public void LoadMenu(GameObject self)
     {
-        SceneManager.LoadScene("Menu");
+        self.SetActive(false);
+        anim.FadeAnimtion();
+        StartCoroutine(DelayEvent(() =>
+        {
+            SceneManager.LoadScene("Menu");
+        }));
     }
 
     public void ExitGameHandler()

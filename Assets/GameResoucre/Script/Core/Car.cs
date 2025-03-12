@@ -7,7 +7,7 @@ public class Car : MonoBehaviour, IColor
     [SerializeField] private int index;
     [SerializeField] private float duration;
     [SerializeField] private bool isCollision;
-    [SerializeField] private ParticleSystem fxCarCollision;
+    [SerializeField] private GameObject fxCarCollision;
     private Vector3 posDefault;
 
     private void Start()
@@ -65,12 +65,12 @@ public class Car : MonoBehaviour, IColor
     {
         GameManager.Instance.OnYouLose?.Invoke(); // kích hoạt delegate YouLose
 
-
+        FxHandler();
         rb.AddExplosionForce(100, hitDir, 3f);
         rb.AddForceAtPosition(Vector3.up * 5f , hitDir , ForceMode.Impulse);
         rb.AddTorque(GetRandomDir(), GetRandomDir(), GetRandomDir());
         isCollision = true;
-        fxCarCollision.Play();
+        
     }
 
     public void ResetValueDefalut()
@@ -78,6 +78,28 @@ public class Car : MonoBehaviour, IColor
         this.transform.position = this.posDefault;
         isCollision = false;
         transform.rotation = Quaternion.identity;
+
+        index = 0;
+        StopAllCoroutines();
+        rb.velocity = Vector3.zero;
+    }
+
+    private void FxHandler()
+    {
+        GameObject fx = ObjectPooling.Instance.GetObjToPools(fxCarCollision);
+        if(fx != null)
+        {
+            fx.transform.position = transform.position + new Vector3(0, 3, 0);
+            transform.rotation = Quaternion.identity;
+        }
+        StartCoroutine(DelayDeactive(fx));
+    }
+
+
+    IEnumerator DelayDeactive(GameObject obj)
+    {
+        yield return new WaitForSeconds(1.5f);
+        obj.SetActive(false);
     }
     private float GetRandomDir()
     {

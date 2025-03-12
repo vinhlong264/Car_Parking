@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -40,7 +41,16 @@ public class Park : MonoBehaviour, IColor
 
     private void fxParkHandler()
     {
-        GameObject fx = Instantiate(fxPark, posFx.position, transform.rotation);
+        GameObject fx = ObjectPooling.Instance.GetObjToPools(fxPark);
+        fx.transform.position = posFx.position;
+        transform.rotation = Quaternion.Euler(-90, 0, 0);
         fx.GetComponent<SpriteRenderer>().color = colorFx;
+        StartCoroutine(DelayDeactive(fx));
+    }
+
+    IEnumerator DelayDeactive(GameObject obj)
+    {
+        yield return new WaitForSeconds(0.75f);
+        obj.SetActive(false);
     }
 }
