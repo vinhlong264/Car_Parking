@@ -8,12 +8,14 @@ public class Car : MonoBehaviour, IColor
     [SerializeField] private float duration;
     [SerializeField] private bool isCollision;
     [SerializeField] private ParticleSystem fxCarCollision;
+    private Vector3 posDefault;
 
     private void Start()
     {
         _route = GetComponentInParent<Route>();
         rb = GetComponent<Rigidbody>();
         isCollision = false;
+        posDefault = transform.position;
     }
 
     public void OnMoveCar(Vector3[] path)
@@ -26,6 +28,7 @@ public class Car : MonoBehaviour, IColor
 
         StartCoroutine(MoveCar(path));
     }
+
 
     IEnumerator MoveCar(Vector3[] path)
     {
@@ -52,7 +55,7 @@ public class Car : MonoBehaviour, IColor
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Car"))
+        if (collision.gameObject.CompareTag("Car") || collision.gameObject.CompareTag("obstacle"))
         {
             ColisionHandler(collision.GetContact(0).point);
         }
@@ -60,7 +63,7 @@ public class Car : MonoBehaviour, IColor
 
     private void ColisionHandler(Vector3 hitDir)
     {
-        GameManager.Instance.OnYouLose();
+        GameManager.Instance.OnYouLose?.Invoke(); // kích hoạt delegate YouLose
 
 
         rb.AddExplosionForce(100, hitDir, 3f);
@@ -70,6 +73,12 @@ public class Car : MonoBehaviour, IColor
         fxCarCollision.Play();
     }
 
+    public void ResetValueDefalut()
+    {
+        this.transform.position = this.posDefault;
+        isCollision = false;
+        transform.rotation = Quaternion.identity;
+    }
     private float GetRandomDir()
     {
         float angle = 20f;

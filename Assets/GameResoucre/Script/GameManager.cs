@@ -6,9 +6,13 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get => instance; }
 
     public LineDrawer lineDrawer;
+    public System.Action OnResetGame;
+    public System.Action OnYouWIn;
+    public System.Action OnYouLose;
 
-    [SerializeField] private LevelDataSO levelDataSO;
-    [SerializeField] private Transform SpawnPos;
+    [Header("UI")]
+    [SerializeField] private GameObject YouWin;
+    [SerializeField] private GameObject YouLose;
 
     private void Awake()
     {
@@ -22,16 +26,32 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void OnEnable()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            levelDataSO.GetLevel("Level 1", SpawnPos);
-        }
+        OnYouWIn += OnYouWinHandler;
+        OnYouLose += OnYouLoseHandler;
     }
 
-    public void OnYouLose()
+    private void OnDisable()
+    {
+        OnYouWIn -= OnYouWinHandler;
+        OnYouLose -= OnYouLoseHandler;
+    }
+
+    private void OnYouLoseHandler()
     {
         Debug.Log("You lose");
+        YouLose.gameObject.SetActive(true);
     }
+
+    private void OnYouWinHandler()
+    {
+        YouWin.gameObject.SetActive(true);
+    }
+
+    public void OnResetGameInvoke()
+    {
+        OnResetGame?.Invoke();
+    }
+
 }

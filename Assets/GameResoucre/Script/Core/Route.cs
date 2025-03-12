@@ -37,6 +37,12 @@ public class Route : MonoBehaviour
        _routeManager.RegisterRoute(this); // đăng kí car di chuyển khi vẽ đến đích
     }
 
+    public void ResetLevel()
+    {
+        this._car.ResetValueDefalut();
+        this._lineRender.ClearLine();
+    }
+
 #if UNITY_2022_3
     private void OnDrawGizmos()
     {

@@ -9,6 +9,17 @@ public class RouteManager : MonoBehaviour
     private int totalRoute;
     private int carToDestination;
 
+    private void OnEnable()
+    {
+        GameManager.Instance.OnResetGame += OnResetHandler;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.OnResetGame -= OnResetHandler;
+    }
+
+
     private void Start()
     {
         totalRoute = GetComponentsInChildren<Route>().Length;
@@ -20,7 +31,7 @@ public class RouteManager : MonoBehaviour
         carToDestination++;
         if(carToDestination == routes.Count)
         {
-            Debug.Log("You win");
+            GameManager.Instance.OnYouWIn?.Invoke(); // kích hoạt delegate You Win 
         }
     }
 
@@ -39,6 +50,26 @@ public class RouteManager : MonoBehaviour
         {
             i.Car.OnMoveCar(i.points.ToArray());
         }
+    }
+
+    private void OnResetHandler()
+    {
+        if (this.routes.Count == 0) return;
+
+        if(this.routes.Count == 1)
+        {
+            this.routes[0].ResetLevel();
+        }
+
+        if(this.routes.Count > 1)
+        {
+            foreach (var i in this.routes)
+            {
+                i.ResetLevel();
+            }
+        }
+
+        this.routes.Clear();
     }
 
 }

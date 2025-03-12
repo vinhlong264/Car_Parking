@@ -28,10 +28,13 @@ public class Park : MonoBehaviour, IColor
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.GetComponent<Car>() != null)
+        if (collision.TryGetComponent<Car>(out Car car))
         {
-            fxParkHandler();
-            routeManager.OnParkEnterDestination();
+            if(_route == car._route)
+            {
+                fxParkHandler();
+                routeManager.OnParkEnterDestination();
+            }
         }
     }
 

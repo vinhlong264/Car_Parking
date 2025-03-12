@@ -1,7 +1,10 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UiManager : MonoBehaviour
 {
+    [SerializeField] private SpawnLevel spawnLevel;
 
     public void PlayBtnHandler(GameObject active)
     {
@@ -25,8 +28,37 @@ public class UiManager : MonoBehaviour
         active.SetActive(false);
     }
 
+    public void OnNextLevelBtn(GameObject setlf)
+    {
+        if (spawnLevel == null) return;
+
+        setlf.SetActive(false);
+
+        StartCoroutine(DelayEvent(() =>
+        {
+            spawnLevel.NextLevel();
+        }));
+    }
+
+    IEnumerator DelayEvent(System.Action action = null)
+    {
+        yield return new WaitForSeconds(1f);
+        action?.Invoke();
+    }
+
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+
     public void ExitGameHandler()
     {
         Application.Quit();
+    }
+
+    public void OnResetGameBtn(GameObject self)
+    {
+        GameManager.Instance.OnResetGameInvoke();
+        self.SetActive(false);
     }
 }

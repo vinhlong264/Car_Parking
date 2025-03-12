@@ -257,7 +257,7 @@ TextureImporter:
         width: 121
         height: 122
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 20, y: 20, z: 20, w: 20}
       outline: []
       physicsShape: []
@@ -278,7 +278,7 @@ TextureImporter:
         width: 121
         height: 124
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 20, y: 20, z: 20, w: 20}
       outline: []
       physicsShape: []
@@ -286,6 +286,132 @@ TextureImporter:
       bones: []
       spriteID: 6396a3b38955a86499e337899820ba14
       internalID: 1629455106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Window_8
+      rect:
+        serializedVersion: 2
+        x: 1196
+        y: 3256
+        width: 375
+        height: 567
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 30, y: 30, z: 30, w: 30}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42d72e58d96540348a63c57e87bc312e
+      internalID: -379362559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Window_9
+      rect:
+        serializedVersion: 2
+        x: 1151
+        y: 3852
+        width: 461
+        height: 143
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 284c35c462237c64585812787c633d88
+      internalID: -1187012046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Window_10
+      rect:
+        serializedVersion: 2
+        x: 1334
+        y: 4877
+        width: 332
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b84aa899b582d124aaae9f869d649895
+      internalID: 1316564303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Window_11
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 3259
+        width: 453
+        height: 626
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0e95a2ae7ecc754b8256d7e26b68e08
+      internalID: 520983161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Window_12
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 3900
+        width: 178
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 10, y: 10, z: 10, w: 10}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da23a90020ad18c4198f336f2656003e
+      internalID: -2016049884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Window_13
+      rect:
+        serializedVersion: 2
+        x: 937
+        y: 1044
+        width: 417
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5140cbf0764a5ef43985becaaf181897
+      internalID: 225304947
       vertices: []
       indices: 
       edges: []
@@ -303,12 +429,18 @@ TextureImporter:
     nameFileIdTable:
       Window_0: 1507101860
       Window_1: -168691143
+      Window_10: 1316564303
+      Window_11: 520983161
+      Window_12: -2016049884
+      Window_13: 225304947
       Window_2: 1037792342
       Window_3: 1438948635
       Window_4: 1475130524
       Window_5: 24731552
       Window_6: 419922095
       Window_7: 1629455106
+      Window_8: -379362559
+      Window_9: -1187012046
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
