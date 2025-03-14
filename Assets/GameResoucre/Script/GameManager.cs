@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -43,17 +45,29 @@ public class GameManager : MonoBehaviour
     private void OnYouLoseHandler()
     {
         Debug.Log("You lose");
-        YouLose.gameObject.SetActive(true);
+        StartCoroutine(DelayEvent(() =>
+        {
+            YouLose.SetActive(true);
+        }));
     }
 
     private void OnYouWinHandler()
     {
-        YouWin.gameObject.SetActive(true);
+        StartCoroutine(DelayEvent(() =>
+        {
+            YouWin.SetActive(true);
+        }));
     }
 
     public void OnResetGameInvoke()
     {
         OnResetGame?.Invoke();
+    }
+
+    IEnumerator DelayEvent(System.Action callBack)
+    {
+        yield return new WaitForSeconds(1.5f);
+        callBack.Invoke();
     }
 
 }
